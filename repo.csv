@@ -1,0 +1,14 @@
+phxinvapp|master|16.15.0|
+phxinvweb|master|16.15.0|
+phx-client-cecilia|master|16.15.0|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/cecilia/style?sffToken=
+phx-client-mvpn|master|16.15.0|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/mvpn/call-screening?sffToken=
+phx-client-nas-portal|master|16.15.0|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/nasportal/nas-portal-mo?sffToken=
+phx-client-number-mangement|master|16.15.0|http://localhost:8443/phx-inventory/auth/signin-sff/phx-admin/number-management/number-admin?sffToken=
+phx-client-customer-portal|master|16.15.0|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/customer-portal/asset?sffToken=
+phx-client-admin|master|14.18.3|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/admin/admin-all-around?sffToken=
+phx-client-wpp|master2|14.18.3|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/wpp/inquiry-cash-card?sffToken=
+phx-client-new-wpp|master|14.18.3|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/new-wpp/wpp-production-control?sffToken=
+phx-client-order|master|14.18.3|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/myoffice/price-plan/plan-management?sffToken=
+phx-client-inventory|master|14.18.3|http://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/inventory/fraud-number?sffToken=
+phx-client-portal|master|14.18.3|http://localhost:8443/phx-inventory/portal/portal-management?sffToken=
+phx-client-s3|master|14.18.3|http://localhost:8443/phx-inventory/auth/signin-sff/phx-s3/s3/s3-viewer?sffToken=
