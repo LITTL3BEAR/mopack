@@ -3,17 +3,17 @@ import subprocess
 import logging
 import colorlog
 from pathlib import Path
+import urllib3
 
 
 def test_repo(data):
     try:
         log.warning("Testing repo")
-        token = exec_cmd("moken UNNCHANC")
+        token = exec_cmd(f"moken UNNCHANC", True)
         for repo, branch, node, url in data:
             if url:
                 link = url + token
-                response = requests.get(link)
-
+                response = requests.get(link, verify=False)
                 log.info(repo)
                 log.debug(link)
                 log.info("PASS") if response.status_code == 200 else log.error("FAIL")
@@ -57,7 +57,7 @@ def read_file(file):
         return data
 
 
-def exec_cmd(command):
+def exec_cmd(command, hide = False):
     try:
         log.info(f"> {command}")
         process = subprocess.Popen(
@@ -74,7 +74,8 @@ def exec_cmd(command):
             lines = data.split("\n")
             data = lines[-1]
 
-        log.debug(data)
+        if not hide: 
+            log.debug(data)
         return data
     except Exception as e:
         log.debug("Error occurring execute command")
@@ -82,6 +83,12 @@ def exec_cmd(command):
 
 
 def init_log():
+    # Disable warnings about insecure requests
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    # Hide logging for 'requests' and 'urllib3'
+    logging.getLogger('requests').setLevel(logging.WARNING)
+    logging.getLogger('urllib3').setLevel(logging.WARNING)
+
     handler = colorlog.StreamHandler()
     formatter = colorlog.ColoredFormatter(
         "%(asctime)s %(log_color)s%(levelname)s: %(message)s",
@@ -108,23 +115,27 @@ def main():
         folder.mkdir(parents=True, exist_ok=True)
         data = read_file("repo.csv")
 
+        print(f"0 = Skip to Test")
         for index, item in enumerate(data):
             print(f"{index+1} = {item[0]}")
-        start = int(input("Start at: "))
 
-        if not 1 <= start <= len(data):
-            raise Exception("Invalid input")
+        range_input = input("Enter range (e.g., 1:3) or '0' ")
+        if range_input != '0':
+            start, end = map(int, range_input.split(':'))
 
-        for repo, branch, node, url in data[start - 1 :]:
-            log.warning(f"{repo} is starting")
-            exec_cmd(f"nvm use {node}")
-            manage_repo(repo, branch, node, folder)
+            if not 0 < start <= end <= len(data):
+                raise Exception("Invalid range input")
+
+            for repo, branch, node, url in data[start - 1:end]:
+                log.warning(f"{repo} is starting")
+                exec_cmd(f"nvm use {node}")
+                manage_repo(repo, branch, node, folder)
 
         exec_cmd("nvm use 16.15.0")
-        text = input("Prepared for testing? (Y/n)")
-        if text.lower() != "y":
+        text = input("Prepared for testing? (Y/n) ")
+        if text.lower() not in ["y", ""]:
             raise KeyboardInterrupt
-        test_repo(data[start - 1 :])
+        test_repo(data)
         input("Press Enter to exit...")
 
     except KeyboardInterrupt:
