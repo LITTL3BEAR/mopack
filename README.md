@@ -11,7 +11,7 @@ This document outlines the steps to pack code prepare for deploy on prod.
   mkdir "C:\Program Files\moken" && copy moken.exe "C:\Program Files\moken\moken.exe"
   ```
 4. Add moken Environment Path : `C:\Program Files\moken`
-5. Run `cpacker.exe` as admin
+5. Run `mopack.exe` as admin
 
 ## Development
 
@@ -22,5 +22,5 @@ This document outlines the steps to pack code prepare for deploy on prod.
   ```
 3. Build
   ```bash
-  pyinstaller --onefile --name cpacker --distpath . main.py
+  pyinstaller --onefile --name mopack --distpath . main.py
   ```
