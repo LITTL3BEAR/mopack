@@ -1,6 +1,4 @@
-# Pack code for deploy
-
-This document outlines the steps to pack code prepare for deploy on prod.
+# Pack Code
 
 ## Setup 
 
@@ -22,5 +20,5 @@ This document outlines the steps to pack code prepare for deploy on prod.
   ```
 3. Build
   ```bash
-  pyinstaller --onefile --name mopack --distpath . main.py
+  pyinstaller --onefile --name mopack --distpath . mopack.py
   ```
