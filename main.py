@@ -51,6 +51,35 @@ def manage_repo(repo, branch, node, folder):
         raise e
 
 
+def manage_repo_ctm(repo, branch, node, folder):
+    try:
+        path = folder / "ctmclient"
+        source = path / "dist" / "contract-management"
+        dest = folder / "phxinvweb" / "public" / "contract-management"
+        url = "https://git.matador.ais.co.th/vhlinventory/"
+        # Clone
+        if not path.exists():
+            exec_cmd(f"git clone {url}contract-management/ctmclient --single-branch -b {branch} {path}")
+        # Setup
+        status = exec_cmd(f"cd {path} && git pull")
+        if not ("Already up to date" in status and (path / "node_modules").is_dir()):
+            exec_cmd(f"cd {path} && npm install")
+
+        if repo not in ["phxinvweb", "phxinvapp"]:
+            # Build
+            if not ("Already up to date" in status and source.exists()):
+                if source.exists():
+                    exec_cmd(f"rd /s /q {source}")
+                exec_cmd(f"cd {path} && npm run build:prod")
+            # Copy
+            if dest.exists():
+                exec_cmd(f"rd /s /q {dest}")
+            exec_cmd(f"xcopy /e /h /c /i {source} {dest}")
+    except Exception as e:
+        log.debug("Error occurring manage repo")
+        raise e
+
+
 def read_file(file):
     with open(file, "r") as f:
         data = [line.strip().split("|") for line in f]
@@ -129,7 +158,10 @@ def main():
             for repo, branch, node, url in data[start - 1:end]:
                 log.warning(f"{repo} is starting")
                 exec_cmd(f"nvm use {node}")
-                manage_repo(repo, branch, node, folder)
+                if 'ctmclient' in repo:
+                    manage_repo_ctm(repo, branch, node, folder)
+                else:
+                    manage_repo(repo, branch, node, folder)
 
         exec_cmd("nvm use 16.15.0")
         text = input("Prepared for testing? (Y/n) ")
