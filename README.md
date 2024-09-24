@@ -1,26 +1,31 @@
-# Pack code for deploy
+# Mopack
 
-This document outlines the steps to pack code prepare for deploy on prod.
+MO project code pack for deploy to production.
 
-## Setup 
+
+## Setup
 
 1. Install [Git](https://git-scm.com/downloads)
 2. Install [NVM](https://github.com/coreybutler/nvm-windows/releases)
-3. Setup moken
+3. Clone Repo
+  ```bash
+  git clone https://github.com/LITTL3BEAR/code-packer.git
+  ```
+4. Copy **moken.exe**
   ```bash
   mkdir "C:\Program Files\moken" && copy moken.exe "C:\Program Files\moken\moken.exe"
   ```
-4. Add moken Environment Path : `C:\Program Files\moken`
-5. Run `mopack.exe` as admin
+5. Add Environment Path : `C:\Program Files\moken`
+6. Run **mopack.exe** as admin
 
-## Development
 
-1. Clone: `git clone https://github.com/LITTL3BEAR/code-packer.git`
-2. Install
+## Build
+
+1. Install pyinstaller
   ```bash
-  pip install -r requirements.txt
+  pip install pyinstaller
   ```
-3. Build
+2. Run Build
   ```bash
-  pyinstaller --onefile --name mopack --distpath . main.py
+  pyinstaller --onefile --name mopack --distpath . mopack.py
   ```

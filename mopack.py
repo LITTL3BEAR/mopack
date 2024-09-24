@@ -58,13 +58,13 @@ def manage_repo(repo, branch, node, folder):
 
 def manage_repo_ctm(repo, branch, node, folder):
     try:
-        path = folder / repo
+        path = folder / "ctmclient"
         source = path / "dist" / "contract-management"
-        dest = folder / "phxinvweb" / "public" / repo
+        dest = folder / "phxinvweb" / "public" / "contract-management"
         url = "https://git.matador.ais.co.th/vhlinventory/"
         # Clone
         if not path.exists():
-            exec_cmd(f"git clone {url}contract-management/{repo} --single-branch -b {branch} {path}")
+            exec_cmd(f"git clone {url}contract-management/ctmclient --single-branch -b {branch} {path}")
         # Setup
         status = exec_cmd(f"cd {path} && git pull")
         if not ("Already up to date" in status and (path / "node_modules").is_dir()):
