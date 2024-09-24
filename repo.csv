@@ -10,6 +10,7 @@ phx-client-wpp|master2|14.18.3|https://localhost:8443/phx-inventory/auth/signin-
 phx-client-new-wpp|master|14.18.3|https://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/new-wpp/wpp-production-control?sffToken=
 phx-client-order|master|14.18.3|https://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/myoffice/price-plan/plan-management?sffToken=
 phx-client-inventory|master|14.18.3|https://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/inventory/fraud-number?sffToken=
-phx-client-portal|master|14.18.3|https://localhost:8443/phx-inventory/portal/portal-management?sffToken=
+mo-client-portal|master|16.15.0|https://localhost:8443/phx-inventory/portal/portal-management?sffToken=
 phx-client-s3|master|14.18.3|https://localhost:8443/phx-inventory/auth/signin-sff/phx-s3/s3/s3-viewer?sffToken=
 mo-client-universe|master|16.15.0|https://localhost:8443/phx-inventory/auth/signin-sff/phx-inventory/universe/inventory/sim/inquiry-sim?sffToken=
+ctmclient|iot|16.15.0|https://localhost:8443/phx-inventory/auth/signin-ctm/phx-inventory/contract-management-ctm/customer-contract-profile?sffToken=
